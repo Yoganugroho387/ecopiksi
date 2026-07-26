@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and auth directories (adjust paths if different)
+Disallow: /admin/
+Disallow: /auth/login.php
+Disallow: /auth/register.php
+Disallow: /nasabah/
+
+# Point to your sitemap
+Sitemap: https://ecopiksi.my.id/sitemap.xml

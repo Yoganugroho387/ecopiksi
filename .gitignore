@@ -1,0 +1,13 @@
+# Dependensi & Vendor
+/vendor/
+composer.lock
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
+
+# Uploads / Cache jika perlu
+/uploads/temp/

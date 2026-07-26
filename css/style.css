@@ -1,0 +1,140 @@
+body {
+    overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+}
+
+/* --- Styling untuk Wrapper Utama --- */
+#wrapper {
+    display: flex; /* Menggunakan Flexbox untuk tata letak sidebar dan konten */
+    min-height: 100vh; /* Pastikan wrapper setidaknya setinggi viewport */
+}
+
+/* --- Styling untuk Sidebar --- */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 15rem; /* Lebar sidebar tetap 15rem */
+    margin-left: -15rem; /* Default: Sembunyikan sidebar ke kiri */
+    transition: margin .25s ease-out; /* Animasi geser */
+    z-index: 1030; /* Pastikan di atas navbar (z-index Bootstrap navbar default: 1050, tapi ini agar aman) */
+    background-color:rgb(22, 138, 255); /* Warna latar belakang gelap */
+    color: white; /* Warna teks putih */
+    flex-shrink: 0; /* Mencegah sidebar menyusut */
+    position: fixed; /* Jadikan fixed agar bisa overlay di mobile */
+    top: 0;
+    left: 0;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(121, 57, 57, 0.1);
+}
+
+#sidebar-wrapper .list-group {
+    width: 100%; /* Pastikan list group mengisi lebar sidebar */
+}
+
+#sidebar-wrapper .list-group-item {
+    border: none;
+    padding: 1rem 1.25rem;
+    color: white; /* Pastikan teks terlihat */
+    background-color: transparent;
+    display: block; /* Pastikan item list adalah blok */
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white; /* Jaga warna teks tetap putih saat hover */
+}
+
+#sidebar-wrapper .list-group-item.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Efek active */
+}
+
+
+/* --- Styling untuk Konten Halaman --- */
+#page-content-wrapper {
+    width: 100%; /* Default mobile: konten mengisi seluruh lebar */
+    min-width: 0; /* Reset min-width untuk flexbox */
+}
+
+/* --- State Toggle: Ketika kelas 'sb-sidenav-toggled' ada pada <body> --- */
+/* Di layar mobile, ini akan membuat sidebar muncul */
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: 0; /* Geser sidebar ke tampilan */
+}
+
+/* Konten utama di layar mobile perlu didorong ke kanan saat sidebar muncul */
+body.sb-sidenav-toggled #wrapper #page-content-wrapper {
+    margin-left: 15rem; /* Dorong konten sejauh lebar sidebar */
+}
+
+
+/* --- Media Query untuk Layar Besar (Desktop - min-width: 992px, breakpoint 'lg' Bootstrap) --- */
+@media (min-width: 992px) {
+    #sidebar-wrapper {
+        margin-left: 0; /* Di desktop: sidebar selalu terlihat secara default */
+        position: relative; /* Kembali ke posisi relatif di desktop */
+        z-index: auto; /* Reset z-index */
+    }
+
+    #page-content-wrapper {
+        min-width: 0; /* Pastikan tidak ada min-width yang mengganggu */
+        width: calc(100% - 15rem); /* Konten mengisi sisa ruang setelah sidebar */
+        margin-left: 0; /* Reset margin-left untuk konten di desktop */
+    }
+
+    /* Di desktop, toggle akan MENYEMBUNYIKAN sidebar */
+    body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+        margin-left: -15rem; /* Sembunyikan sidebar saat toggle aktif pada layar besar */
+    }
+
+    /* Di desktop, konten utama kembali mengisi seluruh lebar saat sidebar disembunyikan */
+    body.sb-sidenav-toggled #wrapper #page-content-wrapper {
+        margin-left: 0; /* Konten tidak perlu didorong */
+        width: 100%; /* Konten mengisi seluruh lebar */
+    }
+}
+/* --- FOOTER NAVIGASI MOBILE --- */
+/* Pastikan body memiliki padding-bottom agar konten tidak tertutup footer tetap */
+@media (max-width: 991.98px) { /* Untuk layar di bawah breakpoint 'lg' (mobile/tablet) */
+    body {
+        padding-bottom: 70px; /* Sesuaikan dengan tinggi footer Anda */
+    }
+}
+
+/* Sembunyikan sidebar di layar kecil (redundant tapi bisa untuk kepastian) */
+@media (max-width: 991.98px) {
+    #sidebar-wrapper {
+        margin-left: -15rem; /* Pastikan tersembunyi */
+        position: fixed;
+    }
+
+    body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
+/* --- FOOTER NAVIGASI MOBILE --- */
+/* Pastikan body memiliki padding-bottom agar konten tidak tertutup footer tetap */
+@media (max-width: 991.98px) { /* Untuk layar di bawah breakpoint 'lg' (mobile/tablet) */
+    body {
+        padding-bottom: 70px; /* Sesuaikan dengan tinggi footer Anda */
+    }
+}
+.profile-link {
+    cursor: pointer; /* Menandakan bisa diklik */
+}
+
+.profile-pic-icon {
+    width: 38px;  /* Ukuran foto profil */
+    height: 38px; /* Pastikan tinggi sama dengan lebar untuk lingkaran sempurna */
+    object-fit: cover; /* Pastikan gambar mengisi area tanpa distorsi */
+    border: 2px solid #0d6efd; /* Border untuk mempercantik */
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Sembunyikan teks nama dan role di layar sangat kecil */
+@media (max-width: 575.98px) { /* Bootstrap 'sm' breakpoint */
+    .profile-link span {
+        display: none !important;
+    }
+}
